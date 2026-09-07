@@ -1,9 +1,30 @@
 import { useState } from "react";
 import { SiBootstrap, SiCss, SiGit, SiGithub, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiPhp, SiPython, SiReact, SiTailwindcss, SiVuedotjs } from "react-icons/si";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeUp, staggerContainer } from "../animations";
+import { motion } from "framer-motion";
 
 function Skills(){
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.08,
+            },
+        },
+    };
+    const cardVariants = {
+        hidden: {
+            opacity: 0,
+            y: 30,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+            }
+        }
+    };
     const [activeFilter, setActiveFilter] = useState("All");
     const filters = ["All" , "Frontend" , "Backend" , "Data" , "Tools"];
     const skills = [
@@ -108,54 +129,86 @@ function Skills(){
                     ))}
                 </div>
                 {/* skills grid */}
-                <AnimatePresence mode="popLayout">
-                    <motion.div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5" layout
-                    variants={staggerContainer}
+                <motion.div
+                    key={activeFilter}
+                    className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+                    variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.15 }}>
-                    {filteredSkills.map((skill)=>{
+                    viewport={{
+                        once: true,
+                        amount: 0.2,
+                    }}>
+                    {filteredSkills.map((skill) => {
                         const Icon = skill.icon;
-                        return(
-                            <motion.div key={skill.name}
-                            variants={fadeUp}
-                            layout
-                            initial="hidden"
-                            animate="visible"
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{
-                                duration: 0.8,
-                                ease: "easeOut",
-                            }}
-                            className="group flex min-h-[130px] flex-col items-center
-                                    justify-center rounded-2xl border border-gray-200
+                        return (
+                            <motion.div
+                                key={skill.name}
+                                variants={cardVariants}
+                                whileHover={{
+                                    y: -6,
+                                    transition: {
+                                        duration: 0.25,
+                                        ease: "easeOut",
+                                    },
+                                }}
+                                className="
+                                    group relative flex min-h-[130px]
+                                    flex-col items-center justify-center
+                                    overflow-hidden rounded-2xl
+                                    border border-gray-200
                                     bg-white/70 p-5 text-center
                                     transition-all duration-300
-                                    hover:-translate-y-1
                                     hover:border-purple-300
-                                    hover:shadow-[0_10px_30px_rgba(168,85,247,0.10)]
+                                    hover:shadow-[0_12px_30px_rgba(168,85,247,0.12)]
                                     dark:border-white/10
                                     dark:bg-white/[0.02]
                                     dark:hover:border-purple-500/30
-                                    dark:hover:shadow-[0_10px_30px_rgba(168,85,247,0.08)]">
-                                <Icon size={38}
-                                        className="mb-4 text-gray-500 transition-all duration-300
-                                        group-hover:scale-110
-                                        group-hover:text-[#A855F7]
-                                        dark:text-gray-400
-                                        dark:group-hover:text-[#A855F7]" />
-                                <h3 className="text-sm font-semibold text-[#18181B] dark:text-[#F5F5F7]">
+                                    dark:hover:shadow-[0_12px_30px_rgba(168,85,247,0.10)]">
+                                {/* Glow */}
+                                <div className="pointer-events-none absolute
+                                        -top-8 h-20 w-20 rounded-full
+                                        bg-purple-500/10 blur-2xl
+                                        opacity-0 transition-opacity duration-300
+                                        group-hover:opacity-100" 
+                                />
+                                {/* Icon */}
+                                <motion.div
+                                    whileHover={{
+                                        scale: 1.12,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 15,
+                                    }}
+                                    className="relative">
+                                    <Icon size={38}
+                                        className="mb-4 text-gray-500
+                                            transition-colors duration-300
+                                            group-hover:text-[#A855F7]
+                                            dark:text-gray-400
+                                            dark:group-hover:text-[#A855F7]"
+                                    />
+                                </motion.div>
+                                {/* Skill name */}
+                                <h3 className="relative text-sm font-semibold
+                                        text-[#18181B]
+                                        dark:text-[#F5F5F7]"
+                                >
                                     {skill.name}
                                 </h3>
-                                <span className="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                {/* Category */}
+                                <span className="relative mt-1 text-xs
+                                        text-gray-500
+                                        dark:text-gray-500"
+                                >
                                     {skill.category}
                                 </span>
                             </motion.div>
                         )
                     })}
                 </motion.div>
-                </AnimatePresence>
-                
             </div>
         </section>
     )

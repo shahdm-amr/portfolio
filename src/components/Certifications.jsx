@@ -25,7 +25,7 @@ function Certifications(){
             date:"2025",
             icon: BarChart3,
             description:"Training focused on building interactive dashboards, analyzing datasets, and transforming raw data into meaningful business insights using Power BI and DAX.",
-            image:"#"
+            image:"c2.jpeg"
         },
         {
             title:"Full Stack Web Development",
