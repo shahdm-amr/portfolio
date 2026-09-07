@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SiBootstrap, SiCss, SiGit, SiGithub, SiHtml5, SiJavascript, SiLaravel, SiMysql, SiPhp, SiPython, SiReact, SiTailwindcss, SiVuedotjs } from "react-icons/si";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, staggerContainer } from "../animations";
 
 function Skills(){
@@ -108,15 +108,25 @@ function Skills(){
                     ))}
                 </div>
                 {/* skills grid */}
-                <motion.div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols lg:grid-cols-5" variants={staggerContainer}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, amount: 0.15 }}>
+                <AnimatePresence mode="popLayout">
+                    <motion.div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5" layout
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}>
                     {filteredSkills.map((skill)=>{
                         const Icon = skill.icon;
                         return(
                             <motion.div key={skill.name}
                             variants={fadeUp}
+                            layout
+                            initial="hidden"
+                            animate="visible"
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{
+                                duration: 0.8,
+                                ease: "easeOut",
+                            }}
                             className="group flex min-h-[130px] flex-col items-center
                                     justify-center rounded-2xl border border-gray-200
                                     bg-white/70 p-5 text-center
@@ -144,6 +154,8 @@ function Skills(){
                         )
                     })}
                 </motion.div>
+                </AnimatePresence>
+                
             </div>
         </section>
     )
