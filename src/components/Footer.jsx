@@ -22,10 +22,10 @@ function Footer() {
                         <a href="#home" className="inline-flex items-center gap-3">
                             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#8B5CF6] 
                                     text-sm font-bold text-white shadow-[0_0_20px_rgba(139,92,246,0.20)]">
-                                SG
+                                SA
                             </span>
                             <span className="text-lg font-semibold text-[#18181B] dark:text-[#F5F5F7]">
-                                Shahd Gamal Eldein
+                                Shahd Amr
                             </span>
                         </a>
                         <p className="mt-4 text-sm leading-6 text-[#71717A]">
@@ -80,7 +80,7 @@ function Footer() {
                 {/* Bottom */}
                 <div className="flex flex-col items-center justify-between gap-5 text-xs sm:flex-row">
                     <p>
-                        © 2026 Shahd Gamal Eldein. All rights reserved.
+                        © 2026 Shahd Amr. All rights reserved.
                     </p>
                     {/* Back to top */}
                     <a href="#home" aria-label="Back to top"

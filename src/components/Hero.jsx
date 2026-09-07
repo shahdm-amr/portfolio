@@ -25,7 +25,7 @@ function Hero(){
                 dark:from-purple-900/60 dark:via-pink-900/40 dark:to-cyan-900/40
                 border border-purple-200 dark:border-purple-500/30
                 text-gray-800 dark:text-gray-200">
-                    Shahd Gamal Eldein
+                    Shahd Amr
                 </span>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18181B] dark:text-[#F5F5F7]">Hi! I'm Shahd</h1>
                 <h3 className="text-xl sm:text-2xl mb-2 font-medium text-[#71717A] dark:text-[#92929D]">Data Engineer & Full Stack Developer</h3>
